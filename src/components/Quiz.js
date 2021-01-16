@@ -21,7 +21,8 @@ class Quiz extends React.Component {
 
     onNext = () => {
         const { currentQuestion } = this.state;
-        let newQuestion = currentQuestion + 1;
+        let { questions } = this.props;
+        let newQuestion = (currentQuestion + 1) % questions.length;
         this.setState({isSelected: false, currentQuestion: newQuestion})
     }
 
@@ -29,11 +30,11 @@ class Quiz extends React.Component {
         const { currentQuestion, isSelected } = this.state;
         let { questions } = this.props;
 
-        let renderedQuestion = <Question qDict={questions[currentQuestion]} onChoose={this.onChoose}/>
+        let renderedQuestion = <Question qDict={questions[currentQuestion]} onChoose={()=>{this.onNext()}}/>
 
         let nextQuestionButton = (
             <div>
-                <Button rightIcon={<ArrowForwardIcon />} colorScheme="teal" variant="outline" onClick={()=>{console.log("HI")}}>
+                <Button rightIcon={<ArrowForwardIcon />} colorScheme="teal" variant="outline" onClick={()=>{this.onNext()}}>
                     Next Question
                 </Button>
             </div>
@@ -43,7 +44,7 @@ class Quiz extends React.Component {
             <div>
                 {renderedQuestion}
                 <br />
-                {isSelected && !isSelected &&
+                {isSelected &&
                     {nextQuestionButton}
                 }
             </div>
@@ -82,7 +83,7 @@ function Question(props) {
     )
 }
 
-const questionOption = (buttonText, onSubmit, marginRight, marginTop) => {
+const questionOption = (buttonText, onClick, marginRight, marginTop) => {
 
     return (
         <Button
@@ -93,7 +94,7 @@ const questionOption = (buttonText, onSubmit, marginRight, marginTop) => {
             borderColor="green.500"
             marginTop={marginTop}
             marginRight={marginRight}
-            onSubmit={()=>onSubmit()}
+            onClick={onClick}
         >
             {buttonText}
         </Button>
