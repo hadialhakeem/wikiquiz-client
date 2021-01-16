@@ -1,27 +1,30 @@
 import React from 'react';
 import { Text } from "@chakra-ui/react"
 import { Button, ButtonGroup } from "@chakra-ui/react"
-import { Box } from "@chakra-ui/react"
 import { Input } from "@chakra-ui/react"
-import { StarIcon } from '@chakra-ui/icons'
-import { Badge } from "@chakra-ui/react"
-import { Image } from "@chakra-ui/react"
 
-
-// Sample card from Airbnb
-
+import Quiz from "./Quiz";
 
 
 class Main extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-            quiz: null
+            quiz: [{'question': 'abc',
+                'answer' : 'd',
+                'options': ['d','a','b']},
+                {'question': 'def',
+                    'answer' : 'd',
+                    'options': ['d','a','b']},
+                {'question': 'tyu',
+                    'answer' : 'd',
+                    'options': ['d','a','b']}]
         }
     }
 
     render(){
+        const { quiz } = this.state;
 
         return (
             <div align={'center'}>
@@ -36,6 +39,10 @@ class Main extends React.Component {
                 <Input variant="outline" size="lg" w="50%" margin="30px" placeholder="Wikipedia Topic"/>
                 <Button colorScheme="blue" size="lg">Search</Button>
               </div>
+
+                {quiz &&
+                    <Quiz questions={quiz} />
+                }
             </div>
         )
 
