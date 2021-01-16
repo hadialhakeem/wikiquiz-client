@@ -30,7 +30,7 @@ class Quiz extends React.Component {
         const { currentQuestion, isSelected } = this.state;
         let { questions } = this.props;
 
-        let renderedQuestion = <Question qDict={questions[currentQuestion]} onChoose={()=>{this.onNext()}}/>
+        let renderedQuestion = <Question qDict={questions[currentQuestion]} onChoose={this.onChoose} />
 
         let nextQuestionButton = (
             <div>
@@ -45,7 +45,7 @@ class Quiz extends React.Component {
                 {renderedQuestion}
                 <br />
                 {isSelected &&
-                    {nextQuestionButton}
+                    nextQuestionButton
                 }
             </div>
         )
@@ -94,7 +94,7 @@ const questionOption = (buttonText, onClick, marginRight, marginTop) => {
             borderColor="green.500"
             marginTop={marginTop}
             marginRight={marginRight}
-            onClick={onClick}
+            onClick={()=>onClick()}
         >
             {buttonText}
         </Button>
