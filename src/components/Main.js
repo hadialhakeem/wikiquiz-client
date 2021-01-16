@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from "@chakra-ui/react";
 
-class Main extends React.component {
+class Main extends React.Component {
     constructor() {
         super();
 
@@ -13,9 +13,9 @@ class Main extends React.component {
     render(){
 
         return (
-            <Box textAlign="center">
+            <div textAlign="center">
                 <h1>WikiMe</h1>
-            </Box>
+            </div>
         )
     }
 }
