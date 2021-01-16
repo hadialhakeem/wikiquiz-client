@@ -36,7 +36,7 @@ class Main extends React.Component {
                 <Text fontSize="xl">Welcome! WikiMe allows you to search for a Wikipedia topic to be quizzed on. Try it out below!</Text>
               </div>
               <div>
-                <Input variant="outline" size="lg" w="50%" margin="30px" placeholder="Wikipedia Topic"/>
+                <Input variant="outline" size="lg" w="50%" margin="30px" placeholder="Article Title"/>
                 <Button colorScheme="blue" size="lg">Search</Button>
               </div>
 
