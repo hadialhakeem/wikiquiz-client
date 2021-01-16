@@ -25,8 +25,8 @@ class BackendAPI {
         return apiCompletionPromise
     }
 
-    static generateQuiz = (link) => {
-        BackendAPI.post('generate', {wikipedia_link: link})
+    static generateQuiz = (title) => {
+        BackendAPI.post('generate', {title: title})
     }
 }
 
