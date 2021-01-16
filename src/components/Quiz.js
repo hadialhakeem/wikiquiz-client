@@ -37,9 +37,8 @@ function Question(props) {
 
     return (
         <div>
-            Question: {qDict.question}
+            Question: {qDict.question} <br />
             Answer: {qDict.answer}
-            <br />
         </div>
     )
 }
