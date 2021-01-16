@@ -30,7 +30,7 @@ class Quiz extends React.Component {
         const { currentQuestion, isSelected } = this.state;
         let { questions } = this.props;
 
-        let renderedQuestion = <Question qDict={questions[currentQuestion]} onChoose={this.onChoose} />
+        let renderedQuestion = <Question disabled={isSelected} qDict={questions[currentQuestion]} onChoose={this.onChoose} />
 
         let nextQuestionButton = (
             <div>
@@ -62,7 +62,7 @@ class Quiz extends React.Component {
 
  */
 function Question(props) {
-    const { qDict, onChoose } = props;
+    const { qDict, onChoose, disabled } = props;
 
     return (
         <div>
@@ -72,18 +72,18 @@ function Question(props) {
                 </Heading>
             </div>
             <div>
-                {questionOption(qDict.options[0], onChoose, "15px","0px")}
-                {questionOption(qDict.options[1], onChoose, "0px", "0px")}
+                {questionOption(qDict.options[0], onChoose, disabled, "15px","0px")}
+                {questionOption(qDict.options[1], onChoose, disabled, "0px", "0px")}
             </div>
             <div>
-                {questionOption(qDict.options[2], onChoose, "15px", "15px")}
-                {questionOption(qDict.options[3], onChoose, "0px", "15px")}
+                {questionOption(qDict.options[2], onChoose, disabled, "15px", "15px")}
+                {questionOption(qDict.options[3], onChoose, disabled, "0px", "15px")}
             </div>
         </div>
     )
 }
 
-const questionOption = (buttonText, onClick, marginRight, marginTop) => {
+const questionOption = (buttonText, onClick, disabled, marginRight, marginTop) => {
 
     return (
         <Button
@@ -95,6 +95,7 @@ const questionOption = (buttonText, onClick, marginRight, marginTop) => {
             marginTop={marginTop}
             marginRight={marginRight}
             onClick={()=>onClick()}
+            isDisabled={disabled}
         >
             {buttonText}
         </Button>
