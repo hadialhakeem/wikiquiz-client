@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react"
 
 class Main extends React.Component {
     constructor() {
@@ -13,8 +13,8 @@ class Main extends React.Component {
     render(){
 
         return (
-            <div textAlign="center">
-                <h1>WikiMe</h1>
+            <div>
+                <Text fontSize="6xl" align={'center'}>WikiMe</Text>
             </div>
         )
     }
