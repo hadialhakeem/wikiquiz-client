@@ -23,13 +23,13 @@ class Main extends React.Component {
     render(){
 
         return (
-            <div>
+            <div align={'center'}>
               <div>
-                <Text fontSize="6xl" align={'center'}>WikiMe</Text>
+                <Text fontSize="6xl">WikiMe</Text>
               </div>
 
               <div>
-                <Text fontSize="xl" align={'center'}>Welcome! WikiMe allows you to search for a Wikipedia topic to be quizzed on. Try it out below!</Text>
+                <Text fontSize="xl">Welcome! WikiMe allows you to search for a Wikipedia topic to be quizzed on. Try it out below!</Text>
               </div>
               <div>
                 <Button colorScheme="blue">Search</Button>
