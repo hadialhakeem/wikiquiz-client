@@ -21,20 +21,21 @@ class Main extends React.Component {
     onSearch = () => {
         const { searchQuery } = this.state;
 
-        this.setState({loading: "Generating Quiz!"})
-        BackendAPI
-            .generateQuiz(searchQuery)
-            .then(res => {
-                const { quiz } = res.data;
-                this.setState({quiz});
+        this.setState({loading: "Generating Quiz!"}, ()=>{
+            BackendAPI
+                .generateQuiz(searchQuery)
+                .then(res => {
+                    const { quiz } = res.data;
+                    this.setState({quiz});
 
-            })
-            .catch(err => {
-                console.log({err})
-            })
-            .finally(()=>{
-                this.setState({loading: null})
-            })
+                })
+                .catch(err => {
+                    console.log({err})
+                })
+                .finally(()=>{
+                    this.setState({loading: null})
+                })
+        })
     }
 
     onSearchChange = (event) => {
@@ -42,7 +43,7 @@ class Main extends React.Component {
     }
 
     render(){
-        const { quiz } = this.state;
+        const { quiz, loading } = this.state;
 
         return (
             <div align={'center'}>
@@ -54,8 +55,13 @@ class Main extends React.Component {
                 <Text fontSize="xl">Welcome! WikiMe allows you to search for a Wikipedia topic to be quizzed on. Try it out below!</Text>
               </div>
               <div>
-                <Input variant="outline" size="lg" w="50%" margin="35px" pb="5px" placeholder="Article Title" onChange={this.onSearchChange}/>
-                <Button colorScheme="blue" size="lg" onClick={()=>this.onSearch()}>Search</Button>
+                <Input disabled={loading} variant="outline" size="lg" w="50%" margin="35px" pb="5px" placeholder="Article Title" onChange={this.onSearchChange}/>
+                <Button
+                    colorScheme="blue" size="lg" onClick={()=>this.onSearch()}
+                    isLoading={loading} loadingText={"Generating Quiz!"}>
+                        Search
+                </Button>
+
               </div>
                 <Cards />
                 {quiz &&

@@ -2,7 +2,7 @@ import request from 'axios';
 import Environment from "./Environment";
 class BackendAPI {
 
-    static ApiURL = `${Environment.apiUrl}/scholarships`;
+    static ApiURL = Environment.apiUrl;
 
     static get = (path='') => {
 
