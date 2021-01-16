@@ -1,9 +1,9 @@
 import React from 'react';
-
+import { Box } from "@chakra-ui/react";
 
 class Main extends React.component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
 
         this.state = {
             quiz: null
@@ -13,9 +13,11 @@ class Main extends React.component {
     render(){
 
         return (
-            <div>
-
-            </div>
+            <Box textAlign="center">
+                <h1>WikiMe</h1>
+            </Box>
         )
     }
 }
+
+export default Main
