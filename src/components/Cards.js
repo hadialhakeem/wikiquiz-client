@@ -1,4 +1,6 @@
 import React from 'react';
+import { Button } from '@chakra-ui/react';
+import { Grid, GridItem } from "@chakra-ui/react"
 
 const cardsData = [
     {'theme': 'Sports',
@@ -24,7 +26,12 @@ class Cards extends React.Component{
         let renderedCards = cardsData.map(card => <Card cardInfo={card} />);
 
         return (
-            {renderedCards}
+          <div>
+          <Grid templateColumns="repeat(4, 1fr)" gap={0} >
+              {renderedCards}
+          </Grid>
+          </div>
+
         )
     }
 }
@@ -35,8 +42,17 @@ function Card(props) {
 
     return (
       <div>
-
+        <Button
+          size="md"
+          height="300px"
+          width="350px"
+          border="2px"
+          borderColor="green.500"
+        >
+          Joe
+        </Button>
       </div>
     );
 }
 
+export default Cards

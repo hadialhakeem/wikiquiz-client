@@ -4,6 +4,7 @@ import { Button } from "@chakra-ui/react"
 import { Input } from "@chakra-ui/react"
 
 import Quiz from "./Quiz";
+import Cards from "./Cards";
 
 
 class Main extends React.Component {
@@ -39,10 +40,11 @@ class Main extends React.Component {
                 <Input variant="outline" size="lg" w="50%" margin="35px" pb="5px" placeholder="Article Title"/>
                 <Button colorScheme="blue" size="lg">Search</Button>
               </div>
-
+                <Cards />
                 {quiz &&
                     <Quiz questions={quiz} />
                 }
+
             </div>
         )
 
