@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from "@chakra-ui/react"
-import { Button, ButtonGroup } from "@chakra-ui/react"
+import { Button } from "@chakra-ui/react"
 import { Input } from "@chakra-ui/react"
 
 import Quiz from "./Quiz";
