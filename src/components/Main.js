@@ -27,7 +27,6 @@ class Main extends React.Component {
                 .then(res => {
                     const { quiz } = res.data;
                     this.setState({quiz});
-
                 })
                 .catch(err => {
                     console.log({err})
