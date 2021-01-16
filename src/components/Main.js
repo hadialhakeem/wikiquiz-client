@@ -50,20 +50,20 @@ class Main extends React.Component {
               <div>
                 <Text fontSize="6xl">WikiMe</Text>
               </div>
+                {!quiz &&
+                <>
+                    <Text fontSize="xl">Welcome! WikiMe allows you to search for a Wikipedia topic to be quizzed on. Try it out below!</Text>
 
-              <div>
-                <Text fontSize="xl">Welcome! WikiMe allows you to search for a Wikipedia topic to be quizzed on. Try it out below!</Text>
-              </div>
-              <div>
-                <Input disabled={loading} variant="outline" size="lg" w="50%" margin="35px" pb="5px" placeholder="Article Title" onChange={this.onSearchChange}/>
-                <Button
-                    colorScheme="blue" size="lg" onClick={()=>this.onSearch()}
-                    isLoading={loading} loadingText={"Generating Quiz!"}>
-                        Search
-                </Button>
+                    <Input disabled={loading} variant="outline" size="lg" w="50%" margin="35px" pb="5px" placeholder="Article Title" onChange={this.onSearchChange}/>
+                    <Button
+                        colorScheme="blue" size="lg" onClick={()=>this.onSearch()}
+                        isLoading={loading} loadingText={"Generating Quiz!"}>
+                            Search
+                    </Button>
 
-              </div>
-                <Cards />
+                    <Cards />
+                </>
+                }
                 {quiz &&
                     <Quiz questions={quiz} />
                 }
