@@ -20,11 +20,11 @@ class BackendAPI {
             data: data,
             url: `${BackendAPI.ApiURL}/${path}`,
         })
-    }
+    };
 
     static generateQuiz = (title) => {
-        BackendAPI.post('generate', {title: title})
-    }
+        return BackendAPI.post('generate', {title: title})
+    };
 }
 
 export default BackendAPI;
