@@ -35,8 +35,9 @@ function Card(props) {
 
     return (
       <div>
-
+        hello
       </div>
     );
 }
 
+export default Cards

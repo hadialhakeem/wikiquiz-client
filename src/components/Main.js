@@ -4,6 +4,7 @@ import { Button } from "@chakra-ui/react"
 import { Input } from "@chakra-ui/react"
 
 import Quiz from "./Quiz";
+import Cards from "./Cards";
 
 
 class Main extends React.Component {
@@ -43,6 +44,8 @@ class Main extends React.Component {
                 {quiz &&
                     <Quiz questions={quiz} />
                 }
+
+                <Cards />
             </div>
         )
 
