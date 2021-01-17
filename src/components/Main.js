@@ -2,11 +2,15 @@ import React from 'react';
 import { Text } from "@chakra-ui/react"
 import { Button } from "@chakra-ui/react"
 import { Input } from "@chakra-ui/react"
+import { Box } from "@chakra-ui/react"
+import { List, ListItem, ListIcon } from "@chakra-ui/react"
 
 import Quiz from "./Quiz";
 import Cards from "./Cards";
 import BackendAPI from "../settings/BackendAPI";
-import {Box} from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/layout";
+import { MdCheckCircle } from 'react-icons/md';
+
 
 class Main extends React.Component {
     constructor(props) {
@@ -163,7 +167,7 @@ class Main extends React.Component {
                 <br />
                 {!quiz &&
                 <>
-                    <Text fontSize="xl">Welcome! WikiMe allows you to search for a Wikipedia topic to be quizzed on. Try it out below!</Text>
+                    <Text fontSize="xl"> WikiMe allows you to choose a Wikipedia topic to be quizzed on. Get started by searching, or choosing one of the topics below!</Text>
 
                     <Input disabled={loading} variant="outline" size="lg" w="50%" margin="35px" pb="5px" placeholder="Article Title" onChange={this.onSearchChange}/>
                     <Button
@@ -181,6 +185,41 @@ class Main extends React.Component {
                     <Quiz questions={quiz} />
                     </>
                 }
+              <Box
+                w="18%"
+                borderRadius="25px"
+                border="2px"
+                backgroundColor="gray.700"
+                borderColor="White"
+                marginTop = "200px"
+
+              >
+                <div>
+                <Text fontSize="xl">Why WikiMe?</Text>
+                </div>
+                <Box
+                  w="70%"
+                  p={4}
+                  color="white"
+                  textAlign="left"
+                >
+
+                <List spacing={3} paddingTop="20px">
+                  <ListItem>
+                    <ListIcon as={MdCheckCircle} color="blue.300" />
+                    Fun with friends!
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={MdCheckCircle} color="blue.300" />
+                    Brush up on trivia skills!
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={MdCheckCircle} color="blue.300" />
+                    Just have a good time!
+                  </ListItem>
+                </List>
+                </Box>
+              </Box>
             </div>
         )
 

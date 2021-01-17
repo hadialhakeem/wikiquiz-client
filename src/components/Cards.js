@@ -16,7 +16,7 @@ const cardsData = [
         'image_url': 'https://imgur.com/RPhlkZp.png'},
 
     {'theme': 'Countries',
-        'description': 'Canada, Belgium, Germany, Iraq, etc.',
+        'description': 'Canada, Belgium, Palestine, Israel, etc.',
         'titles': [],
         'image_url': 'https://i.imgur.com/pv4Taxi.png'},
 
