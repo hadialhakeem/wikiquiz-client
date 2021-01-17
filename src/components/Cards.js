@@ -22,7 +22,7 @@ const cardsData = [
     'image_url': 'https://i.imgur.com/pv4Taxi.png'},
 
     {'theme': 'Movies',
-    'description': 'Soul, Avengers, Mulan, Parasite, Black Panther, Inception',
+    'description': 'Soul, Avengers, Mulan, Parasite,Inception',
     'titles': ['Soul (2020 film)', 'Parasite (2019 film)', 'Inception', 'Avengers: Endgame', 'Mulan (2020 film)',
                 'Toy Story 3', 'Joker (2019 film)', 'Black Panther (film)', 'Suicide Squad (film)'],
     'image_url': 'https://imgur.com/3rPclLh.png'}
