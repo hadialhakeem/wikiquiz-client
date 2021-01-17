@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from "@chakra-ui/react"
+import {Heading, Text} from "@chakra-ui/react"
 import { Button } from "@chakra-ui/react"
 import { Input } from "@chakra-ui/react"
 import { Box } from "@chakra-ui/react"
@@ -50,13 +50,11 @@ class Main extends React.Component {
 
         let wikiMeInfo = (
             <Box
-                w="18%"
+                w="350px"
                 borderRadius="25px"
                 border="2px"
                 backgroundColor="gray.700"
                 borderColor="White"
-                marginTop = "100px"
-
             >
                 <div>
                     <Text fontSize="xl">Why WikiMe?</Text>
@@ -89,13 +87,16 @@ class Main extends React.Component {
         return (
             <div align={'center'}>
               <div>
-                <Text fontSize="6xl">WikiMe</Text>
+                  <Heading as="h1" size="4xl" marginTop={"10px"}>
+                      WikiMe
+                  </Heading>
               </div>
                 <br />
                 {!quiz &&
                 <>
+                    <Box w="80%" >
                     <Text fontSize="xl"> WikiMe allows you to choose a Wikipedia topic to be quizzed on. Get started by searching, or choosing one of the topics below!</Text>
-
+                    </Box>
                     <Input disabled={loading} variant="outline" size="lg" w="50%" margin="35px" pb="5px" placeholder="Article Title" onChange={this.onSearchChange}/>
                     <Button
                         colorScheme="blue" size="lg" onClick={()=>this.onSearch()}
@@ -104,6 +105,9 @@ class Main extends React.Component {
                     </Button>
 
                     <Cards />
+                    <br />
+                    <br />
+                    <br />
                     {wikiMeInfo}
                 </>
                 }
