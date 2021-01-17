@@ -37,7 +37,7 @@ class Cards extends React.Component{
 
         return (
           <div>
-          <Grid templateColumns="repeat(4, 1fr)" gap={0} >
+          <Grid w={'80%'} templateColumns="repeat(4, 1fr)" gap={0} >
               {renderedCards}
           </Grid>
           </div>
