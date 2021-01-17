@@ -7,24 +7,25 @@ import { Text } from "@chakra-ui/react"
 const cardsData = [
     {'theme': 'Sports',
     'description': 'Basketball, Volleyball, Soccer, Lacrosse',
-    'titles': ['Basketball', 'Volleyball', 'Soccer', 'Lacrosse', 'Hockey', 'Baseball', 'Badminton', 'Tennis', 'Ping Pong', 'Golf'],
+    'titles': ['Basketball', 'Volleyball', 'Football', 'Lacrosse', 'Hockey', 'Baseball', 'Badminton', 'Tennis', 'Table Tennis', 'Golf'],
     'image_url': 'https://imgur.com/fLXsBMN.png'},
 
     {'theme': 'Artists',
-    'description': 'Justin Bieber, Miley Cyrus, Pop Smoke, Drake',
-    'titles': ['Jusutin Bieber', 'Miley Cyrus', 'Pop Smoke', 'Drake (musician)', 'Ed Sheeran', 'Shawn Mendes', 'Sia (musician)',
-                'Taylor Swift', 'Beyonce', 'Selena Gomez'],
+    'description': 'Justin Bieber, Miley Cyrus, Pop Smoke, Drake, Beyoncé',
+    'titles': ['Justin Bieber', 'Miley Cyrus', 'Pop Smoke', 'Drake (musician)', 'Ed Sheeran', 'Shawn Mendes', 'Sia (musician)',
+                'Taylor Swift', 'Beyoncé', 'Selena Gomez'],
     'image_url': 'https://imgur.com/RPhlkZp.png'},
 
     {'theme': 'Countries',
-    'description': 'Canada, Belgium, ',
-    'titles': ['Canada', 'Belgium', 'Afghanistan', 'Syria', 'Sri Lanka', ''],
+    'description': 'Canada, Belgium, Mexico, Italy, Germany, France',
+    'titles': ['Canada', 'Belgium', 'Afghanistan', 'Syria', 'Sri Lanka', 'Pakistan', 'Mexico', 'Denmark', 'Switzerland',
+                'Italy', 'France', 'Germany', 'South Korea', 'Greece', 'Sweden'],
     'image_url': 'https://i.imgur.com/pv4Taxi.png'},
 
     {'theme': 'Movies',
-    'description': 'Soul, Avengers, Mulan, Parasite, Black Panther',
+    'description': 'Soul, Avengers, Mulan, Parasite, Black Panther, Inception',
     'titles': ['Soul (2020 film)', 'Parasite (2019 film)', 'Inception', 'Avengers: Endgame', 'Mulan (2020 film)',
-                'Toy Story 3', 'Your Name', 'Joker (2019 film)', 'Black Panther (film)', 'Suicide Squad (film)'],
+                'Toy Story 3', 'Joker (2019 film)', 'Black Panther (film)', 'Suicide Squad (film)'],
     'image_url': 'https://imgur.com/3rPclLh.png'}
 ]
 
