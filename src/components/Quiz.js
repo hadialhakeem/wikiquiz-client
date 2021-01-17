@@ -91,7 +91,9 @@ const questionOption = (buttonText, onClick, disabled, marginRight, marginTop) =
             height="175px"
             width="500px"
             border="2px"
-            borderColor="green.500"
+            color="cyan.200"
+            backgroundColor="gray.700"
+            borderColor="cyan.700"
             marginTop={marginTop}
             marginRight={marginRight}
             onClick={()=>onClick()}
