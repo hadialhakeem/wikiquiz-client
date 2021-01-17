@@ -56,7 +56,7 @@ class Main extends React.Component {
     }
 
     render(){
-        const { quiz, loading, updatedSearchQuery } = this.state;
+        const { quiz, loading, searchQuery, updatedSearchQuery } = this.state;
 
         let wikiMeInfo = (
             <Box
