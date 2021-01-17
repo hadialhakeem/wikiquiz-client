@@ -107,7 +107,12 @@ class Main extends React.Component {
                     <Box w="80%" >
                     <Text fontSize="xl"> WikiMe allows you to choose a Wikipedia topic to be quizzed on. Get started by searching, or choosing one of the topics below!</Text>
                     </Box>
-                    <Input disabled={loading} variant="outline" size="lg" w="50%" margin="35px" pb="5px" placeholder="Article Title" onChange={this.onSearchChange}/>
+                    <Input value={searchQuery}
+                           disabled={loading}
+                           variant="outline"
+                           size="lg" w="50%"
+                           margin="35px" pb="5px"
+                           placeholder="Article Title" onChange={this.onSearchChange}/>
                     <Button
                         colorScheme="blue" size="lg" onClick={()=>this.search()}
                         isLoading={loading} loadingText={"Generating Quiz!"}>
