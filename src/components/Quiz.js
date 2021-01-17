@@ -2,7 +2,7 @@ import React from 'react';
 import { Heading } from "@chakra-ui/react"
 import { Button } from '@chakra-ui/react';
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Text } from "@chakra-ui/layout";
+import {Box, Text} from "@chakra-ui/layout";
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -103,11 +103,12 @@ function Question(props) {
 
     return (
         <div>
-            <div>
+
+            <Box w={'70%'}>
                 <Heading as="h3" size="lg" marginBottom="15px">
                     Question: {qDict.question}
                 </Heading>
-            </div>
+            </Box>
             <br />
             <br />
             <div>
