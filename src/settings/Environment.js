@@ -8,7 +8,7 @@ export const EnvironmentDev = {
 export const EnvironmentProd = {
     name: 'prod',
     production: true,
-    apiUrl: 'http://127.0.0.1:5000',
+    apiUrl: 'https://wikiquiz-serve.herokuapp.com',
 };
 
 let Environment = {};
