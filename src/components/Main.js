@@ -1,5 +1,5 @@
 import React from 'react';
-import {Heading, Text} from "@chakra-ui/react"
+import { Heading, Text } from "@chakra-ui/react"
 import { Button } from "@chakra-ui/react"
 import { Input } from "@chakra-ui/react"
 import { Box } from "@chakra-ui/react"
@@ -7,10 +7,12 @@ import { List, ListItem, ListIcon } from "@chakra-ui/react"
 import { MdCheckCircle } from 'react-icons/md';
 import { Progress } from "@chakra-ui/progress";
 import { createStandaloneToast } from "@chakra-ui/react"
+import { UnorderedList } from "@chakra-ui/react";
 
 import Quiz from "./Quiz";
 import Cards from "./Cards";
 import BackendAPI from "../settings/BackendAPI";
+
 
 const toast = createStandaloneToast()
 
@@ -59,6 +61,25 @@ class Main extends React.Component {
                     })
                     .catch(err => {
                         console.log({err})
+
+                        const errorMessage = (
+                            <>
+                                Your search request failed. This could be because:
+                                <UnorderedList>
+                                    <ListItem>A Wikipedia article with your search query doesn't exist.</ListItem>
+                                    <ListItem>Your query wasn't specific enough.</ListItem>
+                                </UnorderedList>
+                                Try another search or use one of the presets!
+                            </>
+                        )
+
+                        toast({
+                            title: 'Error',
+                            description: errorMessage,
+                            status: "error",
+                            duration: 9000,
+                            isClosable: true,
+                        })
 
                     })
                     .finally(() => {
