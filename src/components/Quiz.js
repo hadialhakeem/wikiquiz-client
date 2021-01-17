@@ -40,6 +40,8 @@ class Quiz extends React.Component {
     }
 
     renderFinalScreen = () => {
+        const { score } = this.state;
+        const { questions } = this.props;
 
         return (
             <div>
@@ -53,7 +55,7 @@ class Quiz extends React.Component {
 
     render () {
         const { currentQuestion, selected, score } = this.state;
-        let { questions } = this.props;
+        const { questions } = this.props;
 
         let renderedQuestion = <Question selected={selected}
                                          qDict={questions[currentQuestion]}
