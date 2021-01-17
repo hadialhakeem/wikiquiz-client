@@ -2,6 +2,7 @@ import React from 'react';
 import { Heading } from "@chakra-ui/react"
 import { Button } from '@chakra-ui/react';
 import {ArrowForwardIcon} from "@chakra-ui/icons";
+import {Text} from "@chakra-ui/layout";
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -35,7 +36,7 @@ class Quiz extends React.Component {
     }
 
     render () {
-        const { currentQuestion, selected } = this.state;
+        const { currentQuestion, selected, score } = this.state;
         let { questions } = this.props;
 
         let renderedQuestion = <Question selected={selected}
@@ -49,14 +50,24 @@ class Quiz extends React.Component {
                 </Button>
             </div>
         )
+        let renderedScore = (
+            <Text fontSize="6xl">Score: {score}/{questions.length}</Text>
+        )
 
         return (
             <div>
                 {renderedQuestion}
-                <br />
+
                 {selected &&
-                    nextQuestionButton
+                    <>
+                        <br />
+                        {nextQuestionButton}
+                    </>
                 }
+                <br />
+                <br />
+                <br />
+                {renderedScore}
             </div>
         )
     }
