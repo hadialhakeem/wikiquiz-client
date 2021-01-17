@@ -1,7 +1,8 @@
 import React from 'react';
 import { Heading } from "@chakra-ui/react"
 import { Button } from '@chakra-ui/react';
-import {ArrowForwardIcon} from "@chakra-ui/icons";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { Text } from "@chakra-ui/layout";
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -10,27 +11,53 @@ class Quiz extends React.Component {
         this.state = {
             currentQuestion: 0,
             score: 0,
-            isSelected: false
+            selected: null
         }
     }
 
-    onChoose = () => {
-        console.log("SELECTED")
-        this.setState({isSelected: true});
+    onChoose = (buttonText, answer) => {
+        const { score } = this.state;
+
+        let newScore;
+        if (buttonText === answer) {
+            newScore = score + 1
+        } else {
+            newScore = score
+        }
+
+        this.setState({selected: buttonText, score: newScore});
     }
 
     onNext = () => {
         const { currentQuestion } = this.state;
         let { questions } = this.props;
         let newQuestion = (currentQuestion + 1) % questions.length;
-        this.setState({isSelected: false, currentQuestion: newQuestion})
+        this.setState({selected: null, currentQuestion: newQuestion})
+    }
+
+    playAgain = () => {
+        window.location.reload();
+    }
+
+    renderFinalScreen = () => {
+
+        return (
+            <div>
+                <Text fontSize="6xl">Thanks for playing!</Text>
+                <Text fontSize="6xl">Your final score was {score}/{questions.length}</Text>
+                <br />
+
+            </div>
+        )
     }
 
     render () {
-        const { currentQuestion, isSelected } = this.state;
+        const { currentQuestion, selected, score } = this.state;
         let { questions } = this.props;
 
-        let renderedQuestion = <Question disabled={isSelected} qDict={questions[currentQuestion]} onChoose={this.onChoose} />
+        let renderedQuestion = <Question selected={selected}
+                                         qDict={questions[currentQuestion]}
+                                         onChoose={this.onChoose} />
 
         let nextQuestionButton = (
             <div>
@@ -39,14 +66,21 @@ class Quiz extends React.Component {
                 </Button>
             </div>
         )
+        let renderedScore = <Text fontSize="6xl">Score: {score}/{questions.length}</Text>
 
         return (
             <div>
                 {renderedQuestion}
-                <br />
-                {isSelected &&
-                    nextQuestionButton
+                {selected &&
+                    <>
+                        <br />
+                        {nextQuestionButton}
+                    </>
                 }
+                <br />
+                <br />
+                <br />
+                {renderedScore}
             </div>
         )
     }
@@ -62,7 +96,8 @@ class Quiz extends React.Component {
 
  */
 function Question(props) {
-    const { qDict, onChoose, disabled } = props;
+    const { qDict, onChoose, selected } = props;
+
 
     return (
         <div>
@@ -71,19 +106,34 @@ function Question(props) {
                     Question: {qDict.question}
                 </Heading>
             </div>
+            <br />
+            <br />
             <div>
-                {questionOption(qDict.options[0], onChoose, disabled, "15px","0px")}
-                {questionOption(qDict.options[1], onChoose, disabled, "0px", "0px")}
+                {questionOption(qDict.options[0], onChoose, selected, "15px","0px", qDict.answer)}
+                {questionOption(qDict.options[1], onChoose, selected, "0px", "0px", qDict.answer)}
             </div>
             <div>
-                {questionOption(qDict.options[2], onChoose, disabled, "15px", "15px")}
-                {questionOption(qDict.options[3], onChoose, disabled, "0px", "15px")}
+                {questionOption(qDict.options[2], onChoose, selected, "15px", "15px", qDict.answer)}
+                {questionOption(qDict.options[3], onChoose, selected, "0px", "15px", qDict.answer)}
             </div>
         </div>
     )
 }
 
-const questionOption = (buttonText, onClick, disabled, marginRight, marginTop) => {
+const questionOption = (buttonText, onClick, selected, marginRight, marginTop, answer) => {
+    let color;
+    let borderColor = "blue.500";
+    if (selected) {
+        if (buttonText === answer) {
+            borderColor = "green.500"
+            color="green"
+        } else {
+            if (buttonText === selected) {
+                borderColor = "red.500"
+                color="red"
+            }
+        }
+    }
 
     return (
         <Button
@@ -91,13 +141,12 @@ const questionOption = (buttonText, onClick, disabled, marginRight, marginTop) =
             height="175px"
             width="500px"
             border="2px"
-            color="cyan.200"
-            backgroundColor="gray.700"
-            borderColor="cyan.700"
+            borderColor={borderColor}
             marginTop={marginTop}
             marginRight={marginRight}
-            onClick={()=>onClick()}
-            isDisabled={disabled}
+            onClick={()=>onClick(buttonText, answer)}
+            isDisabled={!!selected}
+            colorScheme={color}
         >
             {buttonText}
         </Button>
