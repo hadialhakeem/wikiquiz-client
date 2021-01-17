@@ -10,6 +10,7 @@ import Cards from "./Cards";
 import BackendAPI from "../settings/BackendAPI";
 import { MdCheckCircle } from 'react-icons/md';
 import {Progress} from "@chakra-ui/progress";
+import {Alert, AlertIcon} from "@chakra-ui/alert";
 
 
 class Main extends React.Component {
@@ -31,7 +32,7 @@ class Main extends React.Component {
         if (searchQuery==="") {
             this.setState({validateText: "Input cannot be blank"})
         } else {
-            this.setState({loading: "Generating Quiz!"}, () => {
+            this.setState({loading: "Generating Quiz!", validateText: null}, () => {
                 BackendAPI
                     .generateQuiz(searchQuery)
                     .then(res => {
@@ -131,10 +132,13 @@ class Main extends React.Component {
                     </Box>
                     }
                     {validateText &&
-                        <>
-                        <Text color="red.500" fontSize="lg">{validateText}</Text>
-                        <br />
-                        </>
+                        <Box>
+                            <Alert status="error" alignItems="center" justifyContent="center" textAlign="center">
+                                <AlertIcon />
+                                {validateText}
+                            </Alert>
+                            <br />
+                        </Box>
                     }
                     <Cards onCardClick={this.onCardClick} />
                     <br />
@@ -144,7 +148,7 @@ class Main extends React.Component {
                 </>
                 }
                 {quiz &&
-                    <Quiz questions={quiz} title={updatedSearchQuery} />
+                    <Quiz questions={quiz} title={updatedSearchQuery} query={searchQuery}/>
                 }
 
             </div>

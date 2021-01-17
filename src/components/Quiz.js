@@ -2,7 +2,10 @@ import React from 'react';
 import { Heading } from "@chakra-ui/react"
 import { Button } from '@chakra-ui/react';
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import {Box, Text} from "@chakra-ui/layout";
+import { Box, Text } from "@chakra-ui/layout";
+import { createStandaloneToast } from "@chakra-ui/react"
+
+const toast = createStandaloneToast()
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -11,7 +14,8 @@ class Quiz extends React.Component {
         this.state = {
             currentQuestion: 0,
             score: 0,
-            selected: null
+            selected: null,
+            isToastRendered: false
         }
     }
 
@@ -56,8 +60,8 @@ class Quiz extends React.Component {
     }
 
     render () {
-        const { currentQuestion, selected, score } = this.state;
-        const { questions, title } = this.props;
+        const { currentQuestion, selected, score, isToastRendered } = this.state;
+        const { questions, title, query } = this.props;
 
         let renderedQuestion = <Question selected={selected}
                                          qDict={questions[currentQuestion]}
@@ -65,6 +69,7 @@ class Quiz extends React.Component {
 
         let isFinished = (currentQuestion === questions.length);
         let isLastQuestion = (currentQuestion === (questions.length - 1))
+        let isExactSearch = (query.toLowerCase() === title.toLowerCase())
 
         let nextQuestionButton = (
             <div>
@@ -84,6 +89,15 @@ class Quiz extends React.Component {
                 <Heading as="h2" size="2xl">
                     Topic: {title}
                 </Heading>
+                {!isExactSearch && !isToastRendered &&
+                    toast({
+                        title: 'Notice',
+                        description: `Could not find your search query ${query}. Using closest match ${title} instead`,
+                        status: "warning",
+                        duration: 9000,
+                        isClosable: true,
+                    })
+                }
                 <br />
                 {renderedQuestion}
                 {selected &&
@@ -100,7 +114,6 @@ class Quiz extends React.Component {
     }
 
 }
-
 
 /*
 
