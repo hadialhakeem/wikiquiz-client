@@ -158,7 +158,7 @@ class Main extends React.Component {
                 {!quiz &&
                 <>
                     <Box w="80%" >
-                    <Text fontSize="xl"> WikiMe allows you to choose a Wikipedia topic to be quizzed on. Get started by searching, or choosing one of the topics below!</Text>
+                    <Text fontSize="xl"> WikiMe allows you to choose a Wikipedia topic to be quizzed on. Get started by searching an article, or choosing one of the topics below!</Text>
                     </Box>
                     <Input value={searchQuery}
                            disabled={loading}
