@@ -124,19 +124,18 @@ class Main extends React.Component {
                         isLoading={loading} loadingText={"Generating Quiz!"}>
                             Search
                     </Button>
+                    {loading &&
+                    <Box w="60%">
+                        <Progress size="xs" isIndeterminate />
+                        <br />
+                    </Box>
+                    }
                     {validateText &&
                         <>
                         <Text color="red.500" fontSize="lg">{validateText}</Text>
                         <br />
                         </>
                     }
-                    {loading &&
-                        <Box w="60%">
-                            <Progress size="xs" isIndeterminate />
-                            <br />
-                        </Box>
-                    }
-
                     <Cards onCardClick={this.onCardClick} />
                     <br />
                     <br />
