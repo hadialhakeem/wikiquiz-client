@@ -19,27 +19,32 @@ class Main extends React.Component {
             loading: null,
             searchQuery: "",
             quiz: null,
-            updatedSearchQuery: null
+            updatedSearchQuery: "",
+            validateText: null
         }
     }
 
     search = () => {
         const { searchQuery } = this.state;
 
-        this.setState({loading: "Generating Quiz!"}, ()=>{
-            BackendAPI
-                .generateQuiz(searchQuery)
-                .then(res => {
-                    const { quiz, updated_query } = res.data;
-                    this.setState({quiz, updatedSearchQuery: updated_query});
-                })
-                .catch(err => {
-                    console.log({err})
-                })
-                .finally(()=>{
-                    this.setState({loading: null})
-                })
-        })
+        if (searchQuery==="") {
+            this.setState({validateText: "Input cannot be blank"})
+        } else {
+            this.setState({loading: "Generating Quiz!"}, () => {
+                BackendAPI
+                    .generateQuiz(searchQuery)
+                    .then(res => {
+                        const {quiz, updated_query} = res.data;
+                        this.setState({quiz, updatedSearchQuery: updated_query});
+                    })
+                    .catch(err => {
+                        console.log({err})
+                    })
+                    .finally(() => {
+                        this.setState({loading: null})
+                    })
+            })
+        }
     }
 
     onSearchChange = (event) => {
@@ -56,7 +61,7 @@ class Main extends React.Component {
     }
 
     render(){
-        const { quiz, loading, searchQuery, updatedSearchQuery } = this.state;
+        const { quiz, loading, searchQuery, updatedSearchQuery, validateText } = this.state;
 
         let wikiMeInfo = (
             <Box
@@ -118,6 +123,12 @@ class Main extends React.Component {
                         isLoading={loading} loadingText={"Generating Quiz!"}>
                             Search
                     </Button>
+                    {validateText &&
+                        <>
+                        <Text color="red.500" fontSize="lg">{validateText}</Text>
+                        <br />
+                        </>
+                    }
 
                     <Cards onCardClick={this.onCardClick} />
                     <br />

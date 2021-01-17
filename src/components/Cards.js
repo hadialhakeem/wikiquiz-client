@@ -11,13 +11,13 @@ const cardsData = [
     'image_url': 'https://imgur.com/fLXsBMN.png'},
 
     {'theme': 'Artists',
-    'description': 'Justin Bieber, Miley Cyrus, Pop Smoke, Drake, Beyoncé',
+    'description': 'Justin Bieber, Miley Cyrus, Drake, Beyoncé',
     'titles': ['Justin Bieber', 'Miley Cyrus', 'Pop Smoke', 'Drake (musician)', 'Ed Sheeran', 'Shawn Mendes', 'Sia (musician)',
                 'Taylor Swift', 'Beyoncé', 'Selena Gomez'],
     'image_url': 'https://imgur.com/RPhlkZp.png'},
 
     {'theme': 'Countries',
-    'description': 'Canada, Australia, New Zealand, Ireland, England',
+    'description': 'Canada, Australia, Ireland, England',
     'titles': ['Canada', 'Australia', 'New Zealand', 'Ireland', 'England', 'France'],
     'image_url': 'https://i.imgur.com/pv4Taxi.png'},
 
