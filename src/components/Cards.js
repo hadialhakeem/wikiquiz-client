@@ -57,7 +57,7 @@ function Card(props) {
           border="2px"
           backgroundColor="gray.700"
           borderColor="cyan.700"
-          onClick={()=>{()=>onCardClick(cardInfo)}}
+          onClick={()=>onCardClick(cardInfo)}
         >
         <div align="center">
 
