@@ -6,24 +6,24 @@ import { Text } from "@chakra-ui/react"
 
 const cardsData = [
     {'theme': 'Sports',
-    'description': 'Basketball, Volleyball, Soccer, Lacrosse, etc.',
+    'description': 'Basketball, Volleyball, Soccer, Lacrosse',
     'titles': [],
     'image_url': 'https://imgur.com/fLXsBMN.png'},
 
     {'theme': 'Artists',
-        'description': 'Justin Beiber, Miley Cyrus, Pop Smoke, Drake, etc.',
-        'titles': [],
-        'image_url': 'https://imgur.com/RPhlkZp.png'},
+    'description': 'Justin Beiber, Miley Cyrus, Pop Smoke, Drake',
+    'titles': [],
+    'image_url': 'https://imgur.com/RPhlkZp.png'},
 
     {'theme': 'Countries',
-        'description': 'Canada, Belgium, Palestine, Israel, etc.',
-        'titles': [],
-        'image_url': 'https://i.imgur.com/pv4Taxi.png'},
+    'description': 'Canada, Belgium, Palestine, Israel',
+    'titles': [],
+    'image_url': 'https://i.imgur.com/pv4Taxi.png'},
 
     {'theme': 'Movies',
-        'description': 'Soul, Avengers, Mulan, Parasite, etc.',
-        'titles': [],
-        'image_url': 'https://imgur.com/3rPclLh.png'}
+    'description': 'Soul, Avengers, Mulan, Parasite',
+    'titles': [],
+    'image_url': 'https://imgur.com/3rPclLh.png'}
 ]
 
 class Cards extends React.Component{
@@ -73,7 +73,7 @@ function Card(props) {
             />
         </div>
         <div>
-            <Text fontSize="12px" color="teal.400">
+            <Text fontSize="14px" color="teal.400">
                 {cardInfo.description}
             </Text>
 
