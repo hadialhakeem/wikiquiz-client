@@ -78,14 +78,12 @@ class Quiz extends React.Component {
             return this.renderFinalScreen()
         }
 
-        let wikipediaUrl = "https://en.wikipedia.org/wiki/" + title.replace(' ', '-')
+        let wikipediaUrl = "https://en.wikipedia.org/wiki/" + title.replace(' ', '_')
         return (
             <div>
-                <Link href={wikipediaUrl} isExternal>
-                    <Heading as="h2" size="2xl">
-                        Topic: {title}
-                    </Heading>
-                </Link>
+                <Heading as="h2" size="2xl">
+                    Topic: <Link href={wikipediaUrl} isExternal>{title}</Link>
+                </Heading>
                 <br />
                 {renderedQuestion}
                 {selected &&
