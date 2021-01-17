@@ -176,7 +176,10 @@ class Main extends React.Component {
                 </>
                 }
                 {quiz &&
+                    <>
+                    <br />
                     <Quiz questions={quiz} />
+                    </>
                 }
             </div>
         )
