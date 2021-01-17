@@ -2,7 +2,7 @@ import React from 'react';
 import { Heading } from "@chakra-ui/react"
 import { Button } from '@chakra-ui/react';
 import {ArrowForwardIcon} from "@chakra-ui/icons";
-import {Circle, Text} from "@chakra-ui/layout";
+import {Text} from "@chakra-ui/layout";
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -50,13 +50,7 @@ class Quiz extends React.Component {
                 </Button>
             </div>
         )
-        let renderedScore = (
-            <Circle bg="purple.700" h="200px" w="200px">
-                <Text fontSize="xl">
-                    {score}/{questions.length}
-                </Text>
-            </Circle>
-        )
+        let renderedScore = <Text fontSize="6xl">{score}/{questions.length}</Text>
 
         return (
             <div>
