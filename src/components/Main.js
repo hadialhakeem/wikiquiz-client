@@ -9,6 +9,7 @@ import Quiz from "./Quiz";
 import Cards from "./Cards";
 import BackendAPI from "../settings/BackendAPI";
 import { MdCheckCircle } from 'react-icons/md';
+import {Progress} from "@chakra-ui/progress";
 
 
 class Main extends React.Component {
@@ -128,6 +129,12 @@ class Main extends React.Component {
                         <Text color="red.500" fontSize="lg">{validateText}</Text>
                         <br />
                         </>
+                    }
+                    {loading &&
+                        <Box w="60%">
+                            <Progress size="xs" isIndeterminate />
+                            <br />
+                        </Box>
                     }
 
                     <Cards onCardClick={this.onCardClick} />
