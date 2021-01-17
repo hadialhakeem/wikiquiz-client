@@ -18,117 +18,7 @@ class Main extends React.Component {
         this.state = {
             loading: null,
             searchQuery: "",
-            quiz: [
-                {
-                    "answer": "marine",
-                    "full_question": " Gillnetting and Seine netting is a significant cause of mortality in whales and other marine mammals",
-                    "options": [
-                        "whales",
-                        "marine",
-                        "aquatic",
-                        "fully"
-                    ],
-                    "question": " gillnetting and seine netting is a significant cause of mortality in whales and other ____________ mammals"
-                },
-                {
-                    "answer": "aquatic",
-                    "full_question": "Whales are fully aquatic, open ocean creatures, and feed, mate, give birth, suckle and raise their young at sea",
-                    "options": [
-                        "aquatic",
-                        "fully",
-                        "diverse",
-                        "distributed"
-                    ],
-                    "question": "whales are fully ____________, open ocean creatures, and feed, mate, give birth, suckle and raise their young at sea"
-                },
-                {
-                    "answer": "fully",
-                    "full_question": " A year later, the 8,000-kilogram (18,000 lb) whale grew too big to keep in captivity and was released; it was the first of two grey whales, the other being another grey whale calf named JJ, to successfully be kept in captivity",
-                    "options": [
-                        "marine",
-                        "fully",
-                        "aquatic",
-                        "widely"
-                    ],
-                    "question": " a year later, the 8,000-kilogram (18,000 lb) whale grew too big to keep in captivity and was released; it was the first of two grey whales, the other being another grey whale calf named jj, to success____________ be kept in captivity"
-                },
-                {
-                    "answer": "group",
-                    "full_question": " The phylogenetic tree shows the relationships of whales and other mammals, with whale groups  marked in green",
-                    "options": [
-                        "group",
-                        "diverse",
-                        "whales",
-                        "distributed"
-                    ],
-                    "question": " the phylogenetic tree shows the relationships of whales and other mammals, with whale ____________s  marked in green"
-                },
-                {
-                    "answer": "widely",
-                    "full_question": "Whales are a widely distributed and diverse group of fully aquatic placental marine mammals",
-                    "options": [
-                        "aquatic",
-                        "whales",
-                        "mammals",
-                        "widely"
-                    ],
-                    "question": "whales are a ____________ distributed and diverse group of fully aquatic placental marine mammals"
-                },
-                {
-                    "answer": "placental",
-                    "full_question": "Whales are a widely distributed and diverse group of fully aquatic placental marine mammals",
-                    "options": [
-                        "placental",
-                        "group",
-                        "marine",
-                        "mammals"
-                    ],
-                    "question": "whales are a widely distributed and diverse group of fully aquatic ____________ marine mammals"
-                },
-                {
-                    "answer": "mammals",
-                    "full_question": " All mammals sleep, but whales cannot afford to become unconscious for long because they may drown",
-                    "options": [
-                        "mammals",
-                        "aquatic",
-                        "diverse",
-                        "fully"
-                    ],
-                    "question": " all ____________ sleep, but whales cannot afford to become unconscious for long because they may drown"
-                },
-                {
-                    "answer": "distributed",
-                    "full_question": "Whales are a widely distributed and diverse group of fully aquatic placental marine mammals",
-                    "options": [
-                        "group",
-                        "marine",
-                        "distributed",
-                        "placental"
-                    ],
-                    "question": "whales are a widely ____________ and diverse group of fully aquatic placental marine mammals"
-                },
-                {
-                    "answer": "whales",
-                    "full_question": " Some species, such as sperm whales, are well adapted for diving to great depths to catch squid and other favoured prey",
-                    "options": [
-                        "aquatic",
-                        "marine",
-                        "widely",
-                        "whales"
-                    ],
-                    "question": " some species, such as sperm ____________, are well adapted for diving to great depths to catch squid and other favoured prey"
-                },
-                {
-                    "answer": "diverse",
-                    "full_question": "Whales are a widely distributed and diverse group of fully aquatic placental marine mammals",
-                    "options": [
-                        "aquatic",
-                        "widely",
-                        "placental",
-                        "diverse"
-                    ],
-                    "question": "whales are a widely distributed and ____________ group of fully aquatic placental marine mammals"
-                }]
+            quiz: null
         }
     }
 
@@ -158,6 +48,44 @@ class Main extends React.Component {
     render(){
         const { quiz, loading } = this.state;
 
+        let wikiMeInfo = (
+            <Box
+                w="18%"
+                borderRadius="25px"
+                border="2px"
+                backgroundColor="gray.700"
+                borderColor="White"
+                marginTop = "100px"
+
+            >
+                <div>
+                    <Text fontSize="xl">Why WikiMe?</Text>
+                </div>
+                <Box
+                    w="70%"
+                    p={4}
+                    color="white"
+                    textAlign="left"
+                >
+
+                    <List spacing={3} paddingTop="20px">
+                        <ListItem>
+                            <ListIcon as={MdCheckCircle} color="blue.300" />
+                            Fun with friends!
+                        </ListItem>
+                        <ListItem>
+                            <ListIcon as={MdCheckCircle} color="blue.300" />
+                            Brush up on trivia skills!
+                        </ListItem>
+                        <ListItem>
+                            <ListIcon as={MdCheckCircle} color="blue.300" />
+                            Just have a good time!
+                        </ListItem>
+                    </List>
+                </Box>
+            </Box>
+        )
+
         return (
             <div align={'center'}>
               <div>
@@ -176,6 +104,7 @@ class Main extends React.Component {
                     </Button>
 
                     <Cards />
+                    {wikiMeInfo}
                 </>
                 }
                 {quiz &&
@@ -184,41 +113,7 @@ class Main extends React.Component {
                     <Quiz questions={quiz} />
                     </>
                 }
-              <Box
-                w="18%"
-                borderRadius="25px"
-                border="2px"
-                backgroundColor="gray.700"
-                borderColor="White"
-                marginTop = "200px"
 
-              >
-                <div>
-                <Text fontSize="xl">Why WikiMe?</Text>
-                </div>
-                <Box
-                  w="70%"
-                  p={4}
-                  color="white"
-                  textAlign="left"
-                >
-
-                <List spacing={3} paddingTop="20px">
-                  <ListItem>
-                    <ListIcon as={MdCheckCircle} color="blue.300" />
-                    Fun with friends!
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={MdCheckCircle} color="blue.300" />
-                    Brush up on trivia skills!
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={MdCheckCircle} color="blue.300" />
-                    Just have a good time!
-                  </ListItem>
-                </List>
-                </Box>
-              </Box>
             </div>
         )
 
