@@ -46,7 +46,7 @@ class Main extends React.Component {
     }
 
     onCardClick = (cardInfo) => {
-        let options = cardInfo.options;
+        let options = cardInfo.titles;
         let randQuery = options[Math.floor(Math.random() * options.length)];
 
         this.setState({searchQuery: randQuery}, ()=>{
