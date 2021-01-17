@@ -85,7 +85,6 @@ class Quiz extends React.Component {
                 }
                 <br />
                 <br />
-                <br />
                 {renderedScore}
             </div>
         )

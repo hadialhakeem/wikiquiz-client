@@ -18,7 +18,8 @@ class Main extends React.Component {
         this.state = {
             loading: null,
             searchQuery: "",
-            quiz: null
+            quiz: null,
+            updatedSearchQuery: null
         }
     }
 
@@ -29,8 +30,8 @@ class Main extends React.Component {
             BackendAPI
                 .generateQuiz(searchQuery)
                 .then(res => {
-                    const { quiz } = res.data;
-                    this.setState({quiz});
+                    const { quiz, updated_query } = res.data;
+                    this.setState({quiz, updatedSearchQuery: updated_query});
                 })
                 .catch(err => {
                     console.log({err})
@@ -55,7 +56,7 @@ class Main extends React.Component {
     }
 
     render(){
-        const { quiz, loading, searchQuery } = this.state;
+        const { quiz, loading, updatedSearchQuery } = this.state;
 
         let wikiMeInfo = (
             <Box
@@ -121,7 +122,7 @@ class Main extends React.Component {
                 </>
                 }
                 {quiz &&
-                    <Quiz questions={quiz} title={searchQuery} />
+                    <Quiz questions={quiz} title={updatedSearchQuery} />
                 }
 
             </div>
