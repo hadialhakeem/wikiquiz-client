@@ -55,7 +55,7 @@ class Quiz extends React.Component {
 
     render () {
         const { currentQuestion, selected, score } = this.state;
-        const { questions } = this.props;
+        const { questions, title } = this.props;
 
         let renderedQuestion = <Question selected={selected}
                                          qDict={questions[currentQuestion]}
@@ -72,6 +72,10 @@ class Quiz extends React.Component {
 
         return (
             <div>
+                <Heading as="h2" size="2xl">
+                    Topic: {title}
+                </Heading>
+                <br />
                 {renderedQuestion}
                 {selected &&
                     <>
@@ -106,7 +110,7 @@ function Question(props) {
 
             <Box w={'70%'}>
                 <Heading as="h3" size="lg" marginBottom="15px">
-                    Question: {qDict.question}
+                    {qDict.question}
                 </Heading>
             </Box>
             <br />

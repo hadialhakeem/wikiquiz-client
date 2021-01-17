@@ -55,7 +55,7 @@ class Main extends React.Component {
     }
 
     render(){
-        const { quiz, loading } = this.state;
+        const { quiz, loading, searchQuery } = this.state;
 
         let wikiMeInfo = (
             <Box
@@ -121,10 +121,7 @@ class Main extends React.Component {
                 </>
                 }
                 {quiz &&
-                    <>
-                    <br />
-                    <Quiz questions={quiz} />
-                    </>
+                    <Quiz questions={quiz} title={searchQuery} />
                 }
 
             </div>
