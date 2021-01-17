@@ -4,14 +4,15 @@ import { Button } from "@chakra-ui/react"
 import { Input } from "@chakra-ui/react"
 import { Box } from "@chakra-ui/react"
 import { List, ListItem, ListIcon } from "@chakra-ui/react"
+import { MdCheckCircle } from 'react-icons/md';
+import { Progress } from "@chakra-ui/progress";
+import { createStandaloneToast } from "@chakra-ui/react"
 
 import Quiz from "./Quiz";
 import Cards from "./Cards";
 import BackendAPI from "../settings/BackendAPI";
-import { MdCheckCircle } from 'react-icons/md';
-import {Progress} from "@chakra-ui/progress";
-import {Alert, AlertIcon} from "@chakra-ui/alert";
 
+const toast = createStandaloneToast()
 
 class Main extends React.Component {
     constructor(props) {
@@ -22,7 +23,6 @@ class Main extends React.Component {
             searchQuery: "",
             quiz: null,
             updatedSearchQuery: "",
-            validateText: null
         }
     }
 
@@ -30,17 +30,36 @@ class Main extends React.Component {
         const { searchQuery } = this.state;
 
         if (searchQuery==="") {
-            this.setState({validateText: "Input cannot be blank"})
+            toast({
+                title: 'Input Error',
+                description: `Search field cannot be blank.`,
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+            })
         } else {
             this.setState({loading: "Generating Quiz!", validateText: null}, () => {
                 BackendAPI
                     .generateQuiz(searchQuery)
                     .then(res => {
                         const {quiz, updated_query} = res.data;
-                        this.setState({quiz, updatedSearchQuery: updated_query});
+                        this.setState({quiz, updatedSearchQuery: updated_query}, ()=>{
+                            const { updatedSearchQuery } = this.state;
+                            let isExactSearch = (searchQuery.toLowerCase() === updatedSearchQuery.toLowerCase())
+                            if (!isExactSearch) {
+                                toast({
+                                    title: 'Notice',
+                                    description: `Could not find your search query ${searchQuery}. Using closest match ${updatedSearchQuery} instead.`,
+                                    status: "warning",
+                                    duration: 9000,
+                                    isClosable: true,
+                                })
+                            }
+                        });
                     })
                     .catch(err => {
                         console.log({err})
+
                     })
                     .finally(() => {
                         this.setState({loading: null})
@@ -63,7 +82,7 @@ class Main extends React.Component {
     }
 
     render(){
-        const { quiz, loading, searchQuery, updatedSearchQuery, validateText } = this.state;
+        const { quiz, loading, searchQuery, updatedSearchQuery } = this.state;
 
         let wikiMeInfo = (
             <Box
@@ -131,15 +150,7 @@ class Main extends React.Component {
                         <br />
                     </Box>
                     }
-                    {validateText &&
-                        <Box>
-                            <Alert status="error" alignItems="center" justifyContent="center" textAlign="center">
-                                <AlertIcon />
-                                {validateText}
-                            </Alert>
-                            <br />
-                        </Box>
-                    }
+
                     <Cards onCardClick={this.onCardClick} />
                     <br />
                     <br />
