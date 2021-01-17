@@ -177,10 +177,6 @@ class Main extends React.Component {
                 {quiz &&
                     <Quiz questions={quiz} />
                 }
-
-                <Box>
-                    <Text fontSize="xl">TESTING</Text>
-                </Box>
             </div>
         )
 

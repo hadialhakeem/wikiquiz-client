@@ -17,10 +17,11 @@ class Quiz extends React.Component {
     onChoose = (buttonText, answer) => {
         const { score } = this.state;
 
+        let newScore;
         if (buttonText === answer) {
-            let newScore = score + 1
+            newScore = score + 1
         } else {
-            let newScore = score
+            newScore = score
         }
 
         this.setState({selected: buttonText, score: newScore});
