@@ -99,10 +99,11 @@ const questionOption = (buttonText, onClick, selected, marginRight, marginTop, a
     let borderColor = "blue.500";
     if (selected) {
         if (buttonText === answer) {
+            borderColor = "green.500"
             color="green"
         } else {
-            borderColor = "red.500"
             if (buttonText === selected) {
+                borderColor = "red.500"
                 color="red"
             }
         }
