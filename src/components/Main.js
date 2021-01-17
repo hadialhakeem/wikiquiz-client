@@ -1,16 +1,26 @@
 import React from 'react';
-import {Heading, Text} from "@chakra-ui/react"
-import { Button } from "@chakra-ui/react"
-import { Input } from "@chakra-ui/react"
-import { Box } from "@chakra-ui/react"
-import { List, ListItem, ListIcon } from "@chakra-ui/react"
+import {
+    Heading,
+    Text,
+    Button,
+    Input,
+    Box,
+    createStandaloneToast,
+    UnorderedList,
+    List,
+    ListItem,
+    ListIcon,
+    Progress
+} from "@chakra-ui/react";
+
+import { MdCheckCircle } from 'react-icons/md';
 
 import Quiz from "./Quiz";
 import Cards from "./Cards";
 import BackendAPI from "../settings/BackendAPI";
-import { MdCheckCircle } from 'react-icons/md';
-import {Progress} from "@chakra-ui/progress";
 
+
+const toast = createStandaloneToast()
 
 class Main extends React.Component {
     constructor(props) {
@@ -21,7 +31,6 @@ class Main extends React.Component {
             searchQuery: "",
             quiz: null,
             updatedSearchQuery: "",
-            validateText: null
         }
     }
 
@@ -29,17 +38,55 @@ class Main extends React.Component {
         const { searchQuery } = this.state;
 
         if (searchQuery==="") {
-            this.setState({validateText: "Input cannot be blank"})
+            toast({
+                title: 'Input Error',
+                description: `Search field cannot be blank.`,
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+            })
         } else {
-            this.setState({loading: "Generating Quiz!"}, () => {
+            this.setState({loading: "Generating Quiz!", validateText: null}, () => {
                 BackendAPI
                     .generateQuiz(searchQuery)
                     .then(res => {
                         const {quiz, updated_query} = res.data;
-                        this.setState({quiz, updatedSearchQuery: updated_query});
+                        this.setState({quiz, updatedSearchQuery: updated_query}, ()=>{
+                            const { updatedSearchQuery } = this.state;
+                            let isExactSearch = (searchQuery.toLowerCase() === updatedSearchQuery.toLowerCase())
+                            if (!isExactSearch) {
+                                toast({
+                                    title: 'Notice',
+                                    description: `Could not find your exact search query ${searchQuery}. Using closest match ${updatedSearchQuery} instead.`,
+                                    status: "warning",
+                                    duration: 9000,
+                                    isClosable: true,
+                                })
+                            }
+                        });
                     })
                     .catch(err => {
                         console.log({err})
+
+                        const errorMessage = (
+                            <>
+                                Your search request failed. This could be because:
+                                <UnorderedList>
+                                    <ListItem>A Wikipedia article with your search query doesn't exist.</ListItem>
+                                    <ListItem>Your query wasn't specific enough.</ListItem>
+                                </UnorderedList>
+                                Try another search or use one of the presets!
+                            </>
+                        )
+
+                        toast({
+                            title: 'Error',
+                            description: errorMessage,
+                            status: "error",
+                            duration: 9000,
+                            isClosable: true,
+                        })
+
                     })
                     .finally(() => {
                         this.setState({loading: null})
@@ -62,7 +109,7 @@ class Main extends React.Component {
     }
 
     render(){
-        const { quiz, loading, searchQuery, updatedSearchQuery, validateText } = this.state;
+        const { quiz, loading, searchQuery, updatedSearchQuery } = this.state;
 
         let wikiMeInfo = (
             <Box
@@ -130,12 +177,7 @@ class Main extends React.Component {
                         <br />
                     </Box>
                     }
-                    {validateText &&
-                        <>
-                        <Text color="red.500" fontSize="lg">{validateText}</Text>
-                        <br />
-                        </>
-                    }
+
                     <Cards onCardClick={this.onCardClick} />
                     <br />
                     <br />
@@ -144,7 +186,7 @@ class Main extends React.Component {
                 </>
                 }
                 {quiz &&
-                    <Quiz questions={quiz} title={updatedSearchQuery} />
+                    <Quiz questions={quiz} title={updatedSearchQuery} query={searchQuery}/>
                 }
 
             </div>

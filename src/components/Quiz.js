@@ -2,7 +2,7 @@ import React from 'react';
 import { Heading } from "@chakra-ui/react"
 import { Button } from '@chakra-ui/react';
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import {Box, Text} from "@chakra-ui/layout";
+import { Box, Text } from "@chakra-ui/layout";
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class Quiz extends React.Component {
         this.state = {
             currentQuestion: 0,
             score: 0,
-            selected: null
+            selected: null,
         }
     }
 
@@ -100,7 +100,6 @@ class Quiz extends React.Component {
     }
 
 }
-
 
 /*
 
