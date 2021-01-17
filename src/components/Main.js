@@ -22,7 +22,7 @@ class Main extends React.Component {
         }
     }
 
-    onSearch = () => {
+    search = () => {
         const { searchQuery } = this.state;
 
         this.setState({loading: "Generating Quiz!"}, ()=>{
@@ -43,6 +43,12 @@ class Main extends React.Component {
 
     onSearchChange = (event) => {
         this.setState({searchQuery: event.target.value});
+    }
+
+    onCardClick = (cardInfo) => {
+        this.setState({searchQuery: cardInfo.theme}, ()=>{
+            this.search();
+        })
     }
 
     render(){
@@ -99,12 +105,12 @@ class Main extends React.Component {
                     </Box>
                     <Input disabled={loading} variant="outline" size="lg" w="50%" margin="35px" pb="5px" placeholder="Article Title" onChange={this.onSearchChange}/>
                     <Button
-                        colorScheme="blue" size="lg" onClick={()=>this.onSearch()}
+                        colorScheme="blue" size="lg" onClick={()=>this.search()}
                         isLoading={loading} loadingText={"Generating Quiz!"}>
                             Search
                     </Button>
 
-                    <Cards />
+                    <Cards onCardClick={this.onCardClick} />
                     <br />
                     <br />
                     <br />

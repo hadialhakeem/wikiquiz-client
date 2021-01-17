@@ -29,7 +29,9 @@ const cardsData = [
 class Cards extends React.Component{
 
     render() {
-        let renderedCards = cardsData.map(card => <Card cardInfo={card} />);
+        let { onCardClick } = this.props;
+
+        let renderedCards = cardsData.map(card => <Card cardInfo={card} onCardClick={onCardClick} />);
 
         return (
           <div>
@@ -44,7 +46,7 @@ class Cards extends React.Component{
 
 
 function Card(props) {
-    const { cardInfo } = props;
+    const { cardInfo, onCardClick } = props;
 
     return (
       <div>
@@ -55,6 +57,7 @@ function Card(props) {
           border="2px"
           backgroundColor="gray.700"
           borderColor="cyan.700"
+          onClick={()=>{()=>onCardClick(cardInfo)}}
         >
         <div align="center">
 
