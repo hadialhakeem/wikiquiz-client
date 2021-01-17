@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from "@chakra-ui/react"
+import {Heading, Text} from "@chakra-ui/react"
 import { Button } from "@chakra-ui/react"
 import { Input } from "@chakra-ui/react"
 import { Box } from "@chakra-ui/react"
@@ -9,6 +9,7 @@ import Quiz from "./Quiz";
 import Cards from "./Cards";
 import BackendAPI from "../settings/BackendAPI";
 import { MdCheckCircle } from 'react-icons/md';
+import {Progress} from "@chakra-ui/progress";
 
 
 class Main extends React.Component {
@@ -18,207 +19,134 @@ class Main extends React.Component {
         this.state = {
             loading: null,
             searchQuery: "",
-            quiz: [
-                {
-                    "answer": "marine",
-                    "full_question": " Gillnetting and Seine netting is a significant cause of mortality in whales and other marine mammals",
-                    "options": [
-                        "whales",
-                        "marine",
-                        "aquatic",
-                        "fully"
-                    ],
-                    "question": " gillnetting and seine netting is a significant cause of mortality in whales and other ____________ mammals"
-                },
-                {
-                    "answer": "aquatic",
-                    "full_question": "Whales are fully aquatic, open ocean creatures, and feed, mate, give birth, suckle and raise their young at sea",
-                    "options": [
-                        "aquatic",
-                        "fully",
-                        "diverse",
-                        "distributed"
-                    ],
-                    "question": "whales are fully ____________, open ocean creatures, and feed, mate, give birth, suckle and raise their young at sea"
-                },
-                {
-                    "answer": "fully",
-                    "full_question": " A year later, the 8,000-kilogram (18,000 lb) whale grew too big to keep in captivity and was released; it was the first of two grey whales, the other being another grey whale calf named JJ, to successfully be kept in captivity",
-                    "options": [
-                        "marine",
-                        "fully",
-                        "aquatic",
-                        "widely"
-                    ],
-                    "question": " a year later, the 8,000-kilogram (18,000 lb) whale grew too big to keep in captivity and was released; it was the first of two grey whales, the other being another grey whale calf named jj, to success____________ be kept in captivity"
-                },
-                {
-                    "answer": "group",
-                    "full_question": " The phylogenetic tree shows the relationships of whales and other mammals, with whale groups  marked in green",
-                    "options": [
-                        "group",
-                        "diverse",
-                        "whales",
-                        "distributed"
-                    ],
-                    "question": " the phylogenetic tree shows the relationships of whales and other mammals, with whale ____________s  marked in green"
-                },
-                {
-                    "answer": "widely",
-                    "full_question": "Whales are a widely distributed and diverse group of fully aquatic placental marine mammals",
-                    "options": [
-                        "aquatic",
-                        "whales",
-                        "mammals",
-                        "widely"
-                    ],
-                    "question": "whales are a ____________ distributed and diverse group of fully aquatic placental marine mammals"
-                },
-                {
-                    "answer": "placental",
-                    "full_question": "Whales are a widely distributed and diverse group of fully aquatic placental marine mammals",
-                    "options": [
-                        "placental",
-                        "group",
-                        "marine",
-                        "mammals"
-                    ],
-                    "question": "whales are a widely distributed and diverse group of fully aquatic ____________ marine mammals"
-                },
-                {
-                    "answer": "mammals",
-                    "full_question": " All mammals sleep, but whales cannot afford to become unconscious for long because they may drown",
-                    "options": [
-                        "mammals",
-                        "aquatic",
-                        "diverse",
-                        "fully"
-                    ],
-                    "question": " all ____________ sleep, but whales cannot afford to become unconscious for long because they may drown"
-                },
-                {
-                    "answer": "distributed",
-                    "full_question": "Whales are a widely distributed and diverse group of fully aquatic placental marine mammals",
-                    "options": [
-                        "group",
-                        "marine",
-                        "distributed",
-                        "placental"
-                    ],
-                    "question": "whales are a widely ____________ and diverse group of fully aquatic placental marine mammals"
-                },
-                {
-                    "answer": "whales",
-                    "full_question": " Some species, such as sperm whales, are well adapted for diving to great depths to catch squid and other favoured prey",
-                    "options": [
-                        "aquatic",
-                        "marine",
-                        "widely",
-                        "whales"
-                    ],
-                    "question": " some species, such as sperm ____________, are well adapted for diving to great depths to catch squid and other favoured prey"
-                },
-                {
-                    "answer": "diverse",
-                    "full_question": "Whales are a widely distributed and diverse group of fully aquatic placental marine mammals",
-                    "options": [
-                        "aquatic",
-                        "widely",
-                        "placental",
-                        "diverse"
-                    ],
-                    "question": "whales are a widely distributed and ____________ group of fully aquatic placental marine mammals"
-                }]
+            quiz: null,
+            updatedSearchQuery: "",
+            validateText: null
         }
     }
 
-    onSearch = () => {
+    search = () => {
         const { searchQuery } = this.state;
 
-        this.setState({loading: "Generating Quiz!"}, ()=>{
-            BackendAPI
-                .generateQuiz(searchQuery)
-                .then(res => {
-                    const { quiz } = res.data;
-                    this.setState({quiz});
-                })
-                .catch(err => {
-                    console.log({err})
-                })
-                .finally(()=>{
-                    this.setState({loading: null})
-                })
-        })
+        if (searchQuery==="") {
+            this.setState({validateText: "Input cannot be blank"})
+        } else {
+            this.setState({loading: "Generating Quiz!"}, () => {
+                BackendAPI
+                    .generateQuiz(searchQuery)
+                    .then(res => {
+                        const {quiz, updated_query} = res.data;
+                        this.setState({quiz, updatedSearchQuery: updated_query});
+                    })
+                    .catch(err => {
+                        console.log({err})
+                    })
+                    .finally(() => {
+                        this.setState({loading: null})
+                    })
+            })
+        }
     }
 
     onSearchChange = (event) => {
         this.setState({searchQuery: event.target.value});
     }
 
+    onCardClick = (cardInfo) => {
+        let options = cardInfo.titles;
+        let randQuery = options[Math.floor(Math.random() * options.length)];
+
+        this.setState({searchQuery: randQuery}, ()=>{
+            this.search();
+        })
+    }
+
     render(){
-        const { quiz, loading } = this.state;
+        const { quiz, loading, searchQuery, updatedSearchQuery, validateText } = this.state;
 
-        return (
-            <div align={'center'}>
-              <div>
-                <Text fontSize="6xl">WikiMe</Text>
-              </div>
-                <br />
-                {!quiz &&
-                <>
-                    <Text fontSize="xl"> WikiMe allows you to choose a Wikipedia topic to be quizzed on. Get started by searching, or choosing one of the topics below!</Text>
-
-                    <Input disabled={loading} variant="outline" size="lg" w="50%" margin="35px" pb="5px" placeholder="Article Title" onChange={this.onSearchChange}/>
-                    <Button
-                        colorScheme="blue" size="lg" onClick={()=>this.onSearch()}
-                        isLoading={loading} loadingText={"Generating Quiz!"}>
-                            Search
-                    </Button>
-
-                    <Cards />
-                </>
-                }
-                {quiz &&
-                    <>
-                    <br />
-                    <Quiz questions={quiz} />
-                    </>
-                }
-              <Box
-                w="18%"
+        let wikiMeInfo = (
+            <Box
+                w="350px"
                 borderRadius="25px"
                 border="2px"
                 backgroundColor="gray.700"
                 borderColor="White"
-                marginTop = "200px"
-
-              >
+            >
                 <div>
-                <Text fontSize="xl">Why WikiMe?</Text>
+                    <Text fontSize="xl">Why WikiMe?</Text>
                 </div>
                 <Box
-                  w="70%"
-                  p={4}
-                  color="white"
-                  textAlign="left"
+                    w="70%"
+                    p={4}
+                    color="white"
+                    textAlign="left"
                 >
 
-                <List spacing={3} paddingTop="20px">
-                  <ListItem>
-                    <ListIcon as={MdCheckCircle} color="blue.300" />
-                    Fun with friends!
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={MdCheckCircle} color="blue.300" />
-                    Brush up on trivia skills!
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={MdCheckCircle} color="blue.300" />
-                    Just have a good time!
-                  </ListItem>
-                </List>
+                    <List spacing={3} paddingTop="20px">
+                        <ListItem>
+                            <ListIcon as={MdCheckCircle} color="blue.300" />
+                            Fun with friends!
+                        </ListItem>
+                        <ListItem>
+                            <ListIcon as={MdCheckCircle} color="blue.300" />
+                            Brush up on trivia skills!
+                        </ListItem>
+                        <ListItem>
+                            <ListIcon as={MdCheckCircle} color="blue.300" />
+                            Just have a good time!
+                        </ListItem>
+                    </List>
                 </Box>
-              </Box>
+            </Box>
+        )
+
+        return (
+            <div align={'center'}>
+              <div>
+                  <Heading as="h1" size="4xl" marginTop={"10px"}>
+                      WikiMe
+                  </Heading>
+              </div>
+                <br />
+                {!quiz &&
+                <>
+                    <Box w="80%" >
+                    <Text fontSize="xl"> WikiMe allows you to choose a Wikipedia topic to be quizzed on. Get started by searching, or choosing one of the topics below!</Text>
+                    </Box>
+                    <Input value={searchQuery}
+                           disabled={loading}
+                           variant="outline"
+                           size="lg" w="50%"
+                           margin="35px" pb="5px"
+                           placeholder="Article Title" onChange={this.onSearchChange}/>
+                    <Button
+                        colorScheme="blue" size="lg" onClick={()=>this.search()}
+                        isLoading={loading} loadingText={"Generating Quiz!"}>
+                            Search
+                    </Button>
+                    {loading &&
+                    <Box w="60%">
+                        <Progress size="xs" isIndeterminate />
+                        <br />
+                    </Box>
+                    }
+                    {validateText &&
+                        <>
+                        <Text color="red.500" fontSize="lg">{validateText}</Text>
+                        <br />
+                        </>
+                    }
+                    <Cards onCardClick={this.onCardClick} />
+                    <br />
+                    <br />
+                    <br />
+                    {wikiMeInfo}
+                </>
+                }
+                {quiz &&
+                    <Quiz questions={quiz} title={updatedSearchQuery} />
+                }
+
             </div>
         )
 

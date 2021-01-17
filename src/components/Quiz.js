@@ -2,7 +2,7 @@ import React from 'react';
 import { Heading } from "@chakra-ui/react"
 import { Button } from '@chakra-ui/react';
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Text } from "@chakra-ui/layout";
+import {Box, Text} from "@chakra-ui/layout";
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -31,7 +31,7 @@ class Quiz extends React.Component {
     onNext = () => {
         const { currentQuestion } = this.state;
         let { questions } = this.props;
-        let newQuestion = (currentQuestion + 1) % questions.length;
+        let newQuestion = currentQuestion + 1;
         this.setState({selected: null, currentQuestion: newQuestion})
     }
 
@@ -45,33 +45,47 @@ class Quiz extends React.Component {
 
         return (
             <div>
-                <Text fontSize="6xl">Thanks for playing!</Text>
-                <Text fontSize="6xl">Your final score was {score}/{questions.length}</Text>
+                <Text fontSize="4xl">Thanks for playing!</Text>
+                <Text fontSize="4xl">Your final score was {score}/{questions.length}</Text>
                 <br />
-
+                <Button colorScheme="blue" variant="outline" size="lg" onClick={()=>this.playAgain()}>
+                    Play Again
+                </Button>
+                <br />
             </div>
         )
     }
 
     render () {
         const { currentQuestion, selected, score } = this.state;
-        const { questions } = this.props;
+        const { questions, title } = this.props;
 
         let renderedQuestion = <Question selected={selected}
                                          qDict={questions[currentQuestion]}
                                          onChoose={this.onChoose} />
 
+        let isFinished = (currentQuestion === questions.length);
+        let isLastQuestion = (currentQuestion === (questions.length - 1))
+
         let nextQuestionButton = (
             <div>
                 <Button rightIcon={<ArrowForwardIcon />} colorScheme="teal" variant="outline" onClick={()=>{this.onNext()}}>
-                    Next Question
+                    {isLastQuestion && <>View Results</>}
+                    {!isLastQuestion && <>Next Question</>}
                 </Button>
             </div>
         )
         let renderedScore = <Text fontSize="6xl">Score: {score}/{questions.length}</Text>
 
+        if (isFinished){
+            return this.renderFinalScreen()
+        }
         return (
             <div>
+                <Heading as="h2" size="2xl">
+                    Topic: {title}
+                </Heading>
+                <br />
                 {renderedQuestion}
                 {selected &&
                     <>
@@ -79,7 +93,6 @@ class Quiz extends React.Component {
                         {nextQuestionButton}
                     </>
                 }
-                <br />
                 <br />
                 <br />
                 {renderedScore}
@@ -103,11 +116,12 @@ function Question(props) {
 
     return (
         <div>
-            <div>
+
+            <Box w={'70%'}>
                 <Heading as="h3" size="lg" marginBottom="15px">
-                    Question: {qDict.question}
+                    {qDict.question}
                 </Heading>
-            </div>
+            </Box>
             <br />
             <br />
             <div>

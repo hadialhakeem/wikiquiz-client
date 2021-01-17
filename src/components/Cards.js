@@ -1,39 +1,43 @@
 import React from 'react';
 import { Button } from '@chakra-ui/react';
-import { Grid, GridItem } from "@chakra-ui/react"
+import { Grid } from "@chakra-ui/react"
 import { Image } from "@chakra-ui/react"
 import { Text } from "@chakra-ui/react"
 
 const cardsData = [
     {'theme': 'Sports',
-    'description': 'Basketball, Volleyball, Soccer, Lacrosse, etc.',
-    'titles': [],
+    'description': 'Basketball, Volleyball, Soccer, Lacrosse',
+    'titles': ['Basketball', 'Volleyball', 'Football', 'Lacrosse', 'Hockey', 'Baseball', 'Badminton', 'Tennis', 'Table Tennis', 'Golf'],
     'image_url': 'https://imgur.com/fLXsBMN.png'},
 
     {'theme': 'Artists',
-        'description': 'Justin Beiber, Miley Cyrus, Pop Smoke, Drake, etc.',
-        'titles': [],
-        'image_url': 'https://imgur.com/RPhlkZp.png'},
+    'description': 'Justin Bieber, Miley Cyrus, Drake, Beyoncé',
+    'titles': ['Justin Bieber', 'Miley Cyrus', 'Pop Smoke', 'Drake (musician)', 'Ed Sheeran', 'Shawn Mendes', 'Sia (musician)',
+                'Taylor Swift', 'Beyoncé', 'Selena Gomez'],
+    'image_url': 'https://imgur.com/RPhlkZp.png'},
 
     {'theme': 'Countries',
-        'description': 'Canada, Belgium, Palestine, Israel, etc.',
-        'titles': [],
-        'image_url': 'https://i.imgur.com/pv4Taxi.png'},
+    'description': 'Canada, Australia, Ireland, England',
+    'titles': ['Canada', 'Australia', 'New Zealand', 'Ireland', 'England', 'France'],
+    'image_url': 'https://i.imgur.com/pv4Taxi.png'},
 
     {'theme': 'Movies',
-        'description': 'Soul, Avengers, Mulan, Parasite, etc.',
-        'titles': [],
-        'image_url': 'https://imgur.com/3rPclLh.png'}
+    'description': 'Soul, Avengers, Mulan, Parasite,Inception',
+    'titles': ['Soul (2020 film)', 'Parasite (2019 film)', 'Inception', 'Avengers: Endgame', 'Mulan (2020 film)',
+                'Toy Story 3', 'Joker (2019 film)', 'Black Panther (film)', 'Suicide Squad (film)'],
+    'image_url': 'https://imgur.com/3rPclLh.png'}
 ]
 
 class Cards extends React.Component{
 
     render() {
-        let renderedCards = cardsData.map(card => <Card cardInfo={card} />);
+        let { onCardClick } = this.props;
+
+        let renderedCards = cardsData.map(card => <Card cardInfo={card} onCardClick={onCardClick} />);
 
         return (
           <div>
-          <Grid templateColumns="repeat(4, 1fr)" gap={0} >
+          <Grid w={'80%'} templateColumns="repeat(4, 1fr)" gap={0} >
               {renderedCards}
           </Grid>
           </div>
@@ -44,7 +48,7 @@ class Cards extends React.Component{
 
 
 function Card(props) {
-    const { cardInfo } = props;
+    const { cardInfo, onCardClick } = props;
 
     return (
       <div>
@@ -55,6 +59,7 @@ function Card(props) {
           border="2px"
           backgroundColor="gray.700"
           borderColor="cyan.700"
+          onClick={()=>onCardClick(cardInfo)}
         >
         <div align="center">
 
@@ -73,7 +78,7 @@ function Card(props) {
             />
         </div>
         <div>
-            <Text fontSize="12px" color="teal.400">
+            <Text fontSize="14px" color="teal.400">
                 {cardInfo.description}
             </Text>
 
