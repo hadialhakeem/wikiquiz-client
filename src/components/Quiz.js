@@ -1,8 +1,6 @@
 import React from 'react';
-import { Heading } from "@chakra-ui/react"
-import { Button } from '@chakra-ui/react';
+import { Heading, Button, Link, Box, Text } from "@chakra-ui/react"
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Box, Text } from "@chakra-ui/layout";
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -79,10 +77,12 @@ class Quiz extends React.Component {
         if (isFinished){
             return this.renderFinalScreen()
         }
+
+        let wikipediaUrl = "https://en.wikipedia.org/wiki/" + title.replace(' ', '_')
         return (
             <div>
                 <Heading as="h2" size="2xl">
-                    Topic: {title}
+                    Topic: <Link href={wikipediaUrl} isExternal>{title}</Link>
                 </Heading>
                 <br />
                 {renderedQuestion}
