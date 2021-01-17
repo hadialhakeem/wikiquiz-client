@@ -17,9 +17,8 @@ const cardsData = [
     'image_url': 'https://imgur.com/RPhlkZp.png'},
 
     {'theme': 'Countries',
-    'description': 'Canada, Belgium, Mexico, Italy, Germany, France',
-    'titles': ['Canada', 'Belgium', 'Afghanistan', 'Syria', 'Sri Lanka', 'Pakistan', 'Mexico', 'Denmark', 'Switzerland',
-                'Italy', 'France', 'Germany', 'South Korea', 'Greece', 'Sweden'],
+    'description': 'Canada, Australia, New Zealand, Ireland, England',
+    'titles': ['Canada', 'Australia', 'New Zealand', 'Ireland', 'England', 'France'],
     'image_url': 'https://i.imgur.com/pv4Taxi.png'},
 
     {'theme': 'Movies',
