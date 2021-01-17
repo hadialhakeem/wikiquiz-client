@@ -8,7 +8,6 @@ import { List, ListItem, ListIcon } from "@chakra-ui/react"
 import Quiz from "./Quiz";
 import Cards from "./Cards";
 import BackendAPI from "../settings/BackendAPI";
-import { Box } from "@chakra-ui/layout";
 import { MdCheckCircle } from 'react-icons/md';
 
 
