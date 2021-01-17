@@ -49,7 +49,7 @@ class Main extends React.Component {
                             if (!isExactSearch) {
                                 toast({
                                     title: 'Notice',
-                                    description: `Could not find your search query ${searchQuery}. Using closest match ${updatedSearchQuery} instead.`,
+                                    description: `Could not find your exact search query ${searchQuery}. Using closest match ${updatedSearchQuery} instead.`,
                                     status: "warning",
                                     duration: 9000,
                                     isClosable: true,
