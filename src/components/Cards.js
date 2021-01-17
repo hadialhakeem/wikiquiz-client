@@ -7,22 +7,24 @@ import { Text } from "@chakra-ui/react"
 const cardsData = [
     {'theme': 'Sports',
     'description': 'Basketball, Volleyball, Soccer, Lacrosse',
-    'titles': [],
+    'titles': ['Basketball', 'Volleyball', 'Soccer', 'Lacrosse', 'Hockey', 'Baseball', 'Badminton', 'Tennis', 'Ping Pong', 'Golf'],
     'image_url': 'https://imgur.com/fLXsBMN.png'},
 
     {'theme': 'Artists',
-    'description': 'Justin Beiber, Miley Cyrus, Pop Smoke, Drake',
-    'titles': [],
+    'description': 'Justin Bieber, Miley Cyrus, Pop Smoke, Drake',
+    'titles': ['Jusutin Bieber', 'Miley Cyrus', 'Pop Smoke', 'Drake (musician)', 'Ed Sheeran', 'Shawn Mendes', 'Sia (musician)',
+                'Taylor Swift', 'Beyonce', 'Selena Gomez'],
     'image_url': 'https://imgur.com/RPhlkZp.png'},
 
     {'theme': 'Countries',
-    'description': 'Canada, Belgium, Palestine, Israel',
-    'titles': [],
+    'description': 'Canada, Belgium, ',
+    'titles': ['Canada', 'Belgium', 'Afghanistan', 'Syria', 'Sri Lanka', ''],
     'image_url': 'https://i.imgur.com/pv4Taxi.png'},
 
     {'theme': 'Movies',
-    'description': 'Soul, Avengers, Mulan, Parasite',
-    'titles': [],
+    'description': 'Soul, Avengers, Mulan, Parasite, Black Panther',
+    'titles': ['Soul (2020 film)', 'Parasite (2019 film)', 'Inception', 'Avengers: Endgame', 'Mulan (2020 film)',
+                'Toy Story 3', 'Your Name', 'Joker (2019 film)', 'Black Panther (film)', 'Suicide Squad (film)'],
     'image_url': 'https://imgur.com/3rPclLh.png'}
 ]
 
