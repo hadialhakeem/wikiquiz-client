@@ -30,7 +30,6 @@ class Quiz extends React.Component {
 
     onNext = () => {
         const { currentQuestion } = this.state;
-        let { questions } = this.props;
         let newQuestion = currentQuestion + 1;
         this.setState({selected: null, currentQuestion: newQuestion})
     }
